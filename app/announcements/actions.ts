@@ -70,10 +70,11 @@ if (roleRow?.role !== "buyer") {
     throw new Error("Quantity must be greater than 0");
   }
 
-  if (
-    announcement.min_order_quantity &&
-    requestedQuantity < announcement.min_order_quantity
-  ) {
+if (
+  announcement &&
+  announcement.min_order_quantity &&
+  requestedQuantity < announcement.min_order_quantity
+) {
     throw new Error(
       `Minimum order is ${announcement.min_order_quantity} ${announcement.unit}`
     );
