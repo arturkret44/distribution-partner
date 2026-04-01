@@ -3,7 +3,6 @@
 import { supabaseServer } from "@/lib/supabase/server";
 import { requireApprovedUser } from "@/lib/guards";
 import { redirect } from "next/navigation";
-import { EditAnnouncementForm } from "@/app/announcements/new/form";
 import { CreateAnnouncementForm } from "@/app/announcements/new/form";
 export default async function EditAnnouncementPage({
   params,
