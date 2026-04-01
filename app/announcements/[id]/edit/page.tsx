@@ -9,7 +9,7 @@ export default async function EditAnnouncementPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id } = await params; // 🔥 KLUCZOWE
+  const { id } = await params; 
 
   const { user } = await requireApprovedUser();
   const supabase = await supabaseServer();
