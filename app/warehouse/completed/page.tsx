@@ -45,12 +45,21 @@ if (deals && deals.length > 0) {
     .select("id, company_name, contact_email, phone")
     .in("id", farmerIds);
 
-  dealsWithProfiles = deals.map((d) => ({
+  dealsWithProfiles = deals.map((d) => {
+  const farmer = farmerProfiles?.find((p) => p.id === d.farmer_id);
+
+  return {
     ...d,
-    profile: farmerProfiles?.find((p) => p.id === d.farmer_id) || null,
-  }));
+    profile: farmer
+      ? [{
+          company_name: farmer.company_name,
+          contact_email: farmer.contact_email
+        }]
+      : []
+  };
+});
 }
-// 🔥 REVIEW STATUS
+//  REVIEW STATUS
 const reviewStatusMap: Record<string, boolean> = {};
 
 for (const deal of dealsWithProfiles) {
@@ -131,10 +140,10 @@ for (const deal of dealsWithProfiles) {
 </td>
                     <td className="p-3">
                       <div className="font-medium">
-                        {r.profile?.company_name || "Unknown farmer"}
+                        {r.profile?.[0]?.company_name || "Unknown farmer"}
                       </div>
                       <div className="text-xs text-gray-500">
-                        {r.profile?.contact_email}
+                        {r.profile?.[0]?.contact_email}
                       </div>
                     </td>
 
