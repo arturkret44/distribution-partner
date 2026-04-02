@@ -113,6 +113,8 @@ acc[category].push({
   const inventoryView = (
     <InventorySection
       inventoryByCategory={inventoryByCategory || {}}
+      th={th}
+      td={td}
     />
   );
 
