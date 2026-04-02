@@ -105,7 +105,8 @@ farmersMap = Object.fromEntries(
     {/* BODY */}
     <tbody>
       {contracts.map((c) => {
-        const farmerId = const ann = c.announcement?.[0]; ?? null;
+        const ann = c.announcement?.[0];
+        const farmerId = ann?.farmer_id ?? null;
         const farmer = farmerId ? farmersMap[farmerId] : null;
 
         return (
