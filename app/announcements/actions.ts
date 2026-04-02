@@ -80,7 +80,10 @@ if (
     );
   }
 
-  if (requestedQuantity > announcement.quantity_available) {
+if (
+  announcement &&
+  requestedQuantity > announcement.quantity_available
+) {
     throw new Error("Not enough quantity available");
   }
 
