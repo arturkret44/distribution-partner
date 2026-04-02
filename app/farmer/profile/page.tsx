@@ -41,7 +41,7 @@ export default async function FarmerProfilePage() {
         <div className="bg-white/90 backdrop-blur rounded-2xl border shadow-sm p-6 mb-8">
           <FarmerProfileForm
             profile={profile}
-            userEmail={user.email}
+            userEmail={user.email ?? ""}
             saveAction={saveFarmerProfile}
           />
         </div>
