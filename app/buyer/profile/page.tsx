@@ -30,7 +30,7 @@ export default async function BuyerProfilePage() {
         <div className="bg-white p-6 rounded-xl border shadow-sm">
           <BuyerProfileForm
             profile={profile}
-            userEmail={user.email}
+            userEmail={user.email ?? ""}
             saveAction={saveBuyerProfile}
           />
         </div>
