@@ -182,7 +182,7 @@ export default async function HomePage() {
 
               <div className="rounded-2xl bg-green-500/10 border border-green-400/20 p-5">
                 <div className="text-sm font-semibold text-green-200">
-                  With Agri Coordination
+                  With Distribution Partner
                 </div>
                 <p className="mt-2 text-sm text-gray-200">
                   One place to publish offers, attract buyers and coordinate the
