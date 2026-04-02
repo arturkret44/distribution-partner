@@ -16,7 +16,7 @@ export const dynamic = "force-dynamic";
 export default async function AnnouncementsPage({
   searchParams,
 }: {
-searchParams?: Promise<{
+searchParams?: {
   filter?: string;
   search?: string;
   sort?: string;
@@ -27,10 +27,10 @@ searchParams?: Promise<{
   harvest?: string;
   minQty?: string;
   maxQty?: string;
-}>;
+};
 }) {
 
-const params = await searchParams;
+const params = searchParams;
 const filter = params?.filter;
 const search = params?.search;
 const category = params?.category;
@@ -52,6 +52,10 @@ const maxQty = maxQtyRaw !== null && maxQtyRaw >= 0 ? maxQtyRaw : null;
     data: { user },
   } = await supabase.auth.getUser();
 
+if (!user) {
+  return null;
+}
+  
   const { data: profile } = await supabase
     .from("profiles")
     .select("role")
