@@ -163,7 +163,7 @@ export default async function HomePage() {
               <h2 className="mt-4 text-3xl md:text-4xl font-bold leading-tight">
                 Farmers lose time and margin across fragmented channels
               </h2>
-              <p className="mt-5 text-gray-300 text-base md:text-lg max-w-2xl">
+              <p className="mt-5 text-white text-base md:text-lg max-w-2xl">
                 Finding buyers, transport and storage still often means emails,
                 calls, trade fairs, intermediaries and slow coordination.
               </p>
@@ -174,7 +174,7 @@ export default async function HomePage() {
                 <div className="text-sm font-semibold text-white">
                   Before
                 </div>
-                <p className="mt-2 text-sm text-gray-300">
+                <p className="mt-2 text-sm text-white">
                   Multiple contacts, slower response, lower transparency and
                   less control over the process.
                 </p>
@@ -184,7 +184,7 @@ export default async function HomePage() {
                 <div className="text-sm font-semibold text-green-200">
                   With Distribution Partner
                 </div>
-                <p className="mt-2 text-sm text-gray-200">
+                <p className="mt-2 text-sm text-white">
                   One place to publish offers, attract buyers and coordinate the
                   next steps faster.
                 </p>
