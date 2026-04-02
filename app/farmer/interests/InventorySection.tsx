@@ -169,7 +169,7 @@ className="ml-2 px-2 py-0.5 rounded-full text-xs bg-green-100 text-green-700 fon
                     <td style={td}>{item.reserved}</td>
                     <td style={td}>{item.sold}</td>
                   </tr>
-{openProducts[item.id] && item.buyers?.length > 0 && (
+{openProducts[item.id] && (item.buyers?.length ?? 0) > 0 && (
   <tr>
 <td colSpan={5} className="p-4 bg-gray-50 rounded-xl">
 <div className="font-semibold mb-2 text-gray-700">
