@@ -256,7 +256,7 @@ const statusDescriptions: Record<string, string> = {
                         </p>
                       )}
 
-                      {interest.announcement?.farmer?.website && (
+                      {farmer?.website && (
                         <p>
                           🌐{" "}
                           <a
