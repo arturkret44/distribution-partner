@@ -140,7 +140,7 @@ farmersMap = Object.fromEntries(
 
             {/* PRICE */}
             <td className="px-4 py-3 font-semibold text-green-700">
-              {c.offered_price ?? c.announcement?.price ?? "-"} SEK
+              {c.offered_price ?? ann?.price ?? "-"} SEK
             </td>
 
             {/* DATE */}
