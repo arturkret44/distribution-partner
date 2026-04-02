@@ -41,15 +41,19 @@ export default async function CompletedTransportPage() {
       .select("id, company_name, contact_email, phone")
       .in("id", farmerIds);
 
-    dealsWithProfiles = deals.map((d) => ({
-      ...d,
-const farmer = farmers?.find((f) => f.id === d.farmer_id);
+dealsWithProfiles = deals.map((d) => {
+  const farmer = farmers?.find((f) => f.id === d.farmer_id);
 
-profile: farmer ? [{ 
-  company_name: farmer.company_name,
-  contact_email: farmer.contact_email
-}] : []
-    }));
+  return {
+    ...d,
+    profile: farmer
+      ? [{
+          company_name: farmer.company_name,
+          contact_email: farmer.contact_email
+        }]
+      : []
+  };
+});
   }
 //  REVIEW STATUS
 const reviewStatusMap: Record<string, boolean> = {};
@@ -137,10 +141,10 @@ for (const deal of dealsWithProfiles) {
 {/* FARMER */}
 <td className="p-3">
   <div className="font-medium">
-    {r.profile?.company_name || "Unknown"}
+    {r.profile?.[0]?.company_name || "Unknown"}
   </div>
   <div className="text-xs text-gray-500">
-    {r.profile?.contact_email}
+    {r.profile?.[0]?.contact_email}
   </div>
 </td>
 
