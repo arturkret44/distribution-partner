@@ -30,12 +30,15 @@ export default async function BuyerContractsPage() {
   const farmerIds = [
     ...new Set(
       (contracts ?? [])
-        .map((c) => c.announcement?.farmer_id)
+        .map((c) => c.announcement?.[0]?.farmer_id)
         .filter((id): id is string => Boolean(id))
     ),
   ];
 
-  let farmersMap: Record<string, { company_name: string | null }> = {};
+  let farmersMap: Record<
+  string,
+  { id: string; company_name: string | null }
+> = {};
   let farmersErrorMessage: string | null = null;
 
   if (farmerIds.length > 0) {
@@ -102,7 +105,7 @@ farmersMap = Object.fromEntries(
     {/* BODY */}
     <tbody>
       {contracts.map((c) => {
-        const farmerId = c.announcement?.farmer_id ?? null;
+        const farmerId = const ann = c.announcement?.[0]; ?? null;
         const farmer = farmerId ? farmersMap[farmerId] : null;
 
         return (
@@ -112,12 +115,12 @@ farmersMap = Object.fromEntries(
           >
             {/* PRODUCT */}
             <td className="px-4 py-3 font-medium text-gray-800">
-              {c.announcement?.product_name ?? "—"}
+              {ann?.product_name ?? "—"}
             </td>
 
             {/* QUANTITY */}
             <td className="px-4 py-3 text-gray-600">
-              {c.requested_quantity ?? "-"} {c.announcement?.unit ?? ""}
+              {c.requested_quantity ?? "-"} {ann?.unit ?? ""}
             </td>
 
             {/* FARMER */}
