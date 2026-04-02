@@ -114,12 +114,23 @@ const { data: completedDeals } = await supabase
       .in("id", farmerIds);
 
     // 3. Łączymy dane w kodzie
-    requestsWithProfiles = requests.map((r) => ({
-      ...r,
-      profile: farmerProfiles?.find((p) => p.id === r.farmer_id) || null,
-    }));
+requestsWithProfiles = requests.map((r) => {
+  const farmer = farmerProfiles?.find((p) => p.id === r.farmer_id);
+
+  return {
+    ...r,
+    profile: farmer
+      ? [{
+          id: farmer.id,
+          company_name: farmer.company_name,
+          contact_email: farmer.contact_email,
+          phone: farmer.phone
+        }]
+      : []
+  };
+});
 }
-// 👉 NOWE (najważniejsze)
+
 const activeRequests = requestsWithProfiles.filter(
   (r) => r.status !== "closed" && r.status !== "rejected"
 );
@@ -142,7 +153,7 @@ const completedRequests = requestsWithProfiles.filter(
 
     <section className="max-w-4xl mx-auto px-6 py-10">
 
-  {/* 🔥 TABS */}
+  {/*  TABS */}
   <div className="flex gap-4 mb-6">
     <a
       href="/warehouse/requests?tab=active"
@@ -191,48 +202,48 @@ const completedRequests = requestsWithProfiles.filter(
                 </div>
 
                 {/* ===== PRODUCT CARD ===== */}
-                {r.announcements && (
+                {r.announcements?.[0] && (
                   <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-4">
                     <h3 className="font-semibold text-purple-800 text-base mb-2">
-                      📦 {r.announcements.product_name}
+                      📦 {r.announcements?.[0]?.product_name}
                     </h3>
 
                     <div className="grid grid-cols-2 gap-2 text-sm text-gray-700">
                       <div>
-                        Quantity: {r.announcements.quantity}{" "}
-                        {r.announcements.unit}
+                        Quantity: {r.announcements?.[0]?.quantity}{" "}
+                        {r.announcements?.[0]?.unit}
                       </div>
 
                       <div>
-                        Quality: {r.announcements.quality || "not specified"}
+                        Quality: {r.announcements?.[0]?.quality || "not specified"}
                       </div>
 
                       <div>
-                        Location: {r.announcements.pickup_region} –{" "}
-                        {r.announcements.pickup_kommun}
+                        Location: {r.announcements?.[0]?.pickup_region} – {r.announcements?.[0]?.pickup_kommun}
+                        {r.announcements?.[0]?.pickup_kommun}
                       </div>
 
                       <div>
                         Refrigeration:{" "}
-                        {r.announcements.requires_refrigeration ? "Yes" : "No"}
+                        {r.announcements?.[0]?.requires_refrigeration ? "Yes" : "No"}
                       </div>
 
                       <div>
                         Sell by:{" "}
-                        {r.announcements.sell_by_date || "not specified"}
+                        {r.announcements?.[0]?.sell_by_date || "not specified"}
                       </div>
 
                       <div>
                         Price:{" "}
-                        {r.announcements.price_negotiable
+                        {r.announcements?.[0]?.price_negotiable
                           ? "Negotiable"
-                          : r.announcements.price || "not specified"}
+                          : r.announcements?.[0]?.price || "not specified"}
                       </div>
                     </div>
 
-                    {r.announcements.location && (
+                    {r.announcements?.[0]?.location && (
                       <div className="text-xs text-gray-500 mt-2">
-                        Exact location: {r.announcements.location}
+                        Exact location: {r.announcements?.[0]?.location}
                       </div>
                     )}
                   </div>
@@ -282,21 +293,23 @@ const completedRequests = requestsWithProfiles.filter(
 <div>
   Company:{" "}
   <a
-    href={`/profiles/${r.profile?.id}?from=/warehouse/requests`}
+    href={`/profiles/${r.profile?.[0]?.id}?from=/warehouse/requests`}
     className="text-purple-700 font-semibold hover:underline"
   >
-    {r.profile?.company_name || "not provided"}
+    {r.profile?.[0]?.company_name || "not provided"}
   </a>
 </div>
 
 <p className="text-xs text-gray-500 mt-1">
   Check company profile
 </p>
-                    {r.profile?.contact_email && (
-                      <div>Email: {r.profile.contact_email}</div>
-                    )}
+{r.profile?.[0]?.contact_email && (
+  <div>Email: {r.profile[0].contact_email}</div>
+)}
 
-                    {r.profile?.phone && <div>Phone: {r.profile.phone}</div>}
+{r.profile?.[0]?.phone && (
+  <div>Phone: {r.profile[0].phone}</div>
+)}
                   </div>
                 </div>
               </div>
@@ -333,7 +346,7 @@ const completedRequests = requestsWithProfiles.filter(
       : "—"}
   </div>
 
-  {/* 🔥 NOWE DANE */}
+  {/*  NOWE DANE */}
   <div className="text-sm text-gray-700 mt-2 space-y-1">
     <div>
       📅 {r.storage_start_date || "?"} → {r.storage_end_date || "?"}
@@ -352,25 +365,24 @@ const completedRequests = requestsWithProfiles.filter(
     )}
   </div>
 
-  {/* 🧑‍🌾 FARMER */}
+  {/*  FARMER */}
   <div className="mt-3 text-sm text-gray-600">
     <div>
       Farmer:{" "}
-      <span className="font-medium">
-        {r.profile?.company_name || "Unknown"}
-      </span>
+<span className="font-medium">
+  {r.profile?.[0]?.company_name || "Unknown"}
+</span>
     </div>
 
-    {r.profile?.contact_email && (
-      <div>Email: {r.profile.contact_email}</div>
-    )}
-
-    {r.profile?.phone && (
-      <div>Phone: {r.profile.phone}</div>
-    )}
+{r.profile?.[0]?.contact_email && (
+  <div>Email: {r.profile[0].contact_email}</div>
+)}
+{r.profile?.[0]?.phone && (
+  <div>Phone: {r.profile[0].phone}</div>
+)}
   </div>
 
-  {/* 📝 NOTES */}
+  {/*  NOTES */}
   {r.storage_notes && (
     <div className="mt-3 text-sm text-gray-600">
       📝 {r.storage_notes}
