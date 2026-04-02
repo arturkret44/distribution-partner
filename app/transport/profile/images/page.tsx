@@ -26,7 +26,10 @@ export default async function TransportImagesPage() {
         </a>
 
         {imageCount < 5 ? (
-          <UploadForm currentCount={imageCount} />
+          <UploadForm 
+  announcementId={user.id}
+  currentCount={imageCount} 
+/>
         ) : (
           <p className="mt-6 text-sm text-orange-600">
             Maximum 5 images uploaded.
