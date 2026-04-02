@@ -314,7 +314,7 @@ const statusDescriptions: Record<string, string> = {
                             type="hidden"
                             name="reviewed_user_id"
                             value={
-                              interest.announcement?.farmer?.id
+                              farmer?.id
                             }
                           />
 
