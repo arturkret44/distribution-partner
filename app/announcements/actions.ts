@@ -8,7 +8,7 @@ export async function createInterest(formData: FormData) {
   const supabase = await supabaseServer();
   const { user } = await requireApprovedUser();
 
-// 🔒 ONLY BUYER CAN CREATE INTEREST
+//  ONLY BUYER CAN CREATE INTEREST
 const { data: roleRow } = await supabase
   .from("profiles")
   .select("role")
@@ -33,7 +33,7 @@ if (roleRow?.role !== "buyer") {
       ? Number(offeredPriceRaw)
       : null;
 
-  // 🔍 sprawdzamy profil kupującego
+  //  sprawdzamy profil kupującego
   const { data: profile } = await supabase
     .from("profiles")
     .select("company_name, phone, country, city")
@@ -51,7 +51,7 @@ if (roleRow?.role !== "buyer") {
     redirect("/buyer/profile");
   }
 
-  // 🔍 pobieramy ogłoszenie
+  //  pobieramy ogłoszenie
   const { data: announcement } = await supabase
     .from("announcements")
     .select(
@@ -60,12 +60,17 @@ if (roleRow?.role !== "buyer") {
     .eq("id", announcementId)
     .single();
 
-  // 💰 jeśli negocjowalne → cena wymagana
+  //  FIX
+if (!announcement) {
+  throw new Error("Announcement not found");
+}
+
+  //  jeśli negocjowalne → cena wymagana
   if (announcement?.price_negotiable && !offeredPrice) {
     throw new Error("Offer price is required for negotiable listings");
   }
 
-  // 🧮 WALIDACJA ILOŚCI
+  //  WALIDACJA ILOŚCI
   if (!requestedQuantity || requestedQuantity <= 0) {
     throw new Error("Quantity must be greater than 0");
   }
@@ -87,7 +92,7 @@ if (
     throw new Error("Not enough quantity available");
   }
 
-  // 🔒 REZERWACJA ILOŚCI
+  //  REZERWACJA ILOŚCI
   const newAvailable =
     announcement.quantity_available - requestedQuantity;
 
@@ -101,11 +106,11 @@ if (
     throw new Error(updateError.message);
   }
 
-  // ⏳ 48h ważności rezerwacji
+  //  48h ważności rezerwacji
   const expiresAt = new Date();
   expiresAt.setHours(expiresAt.getHours() + 48);
 
-  // ➕ zapis interest
+  //  zapis interest
   const { error } = await supabase.from("interests").insert({
     announcement_id: announcementId,
     buyer_id: user.id,
@@ -123,7 +128,7 @@ if (
     throw new Error(error.message);
   }
 
-  // 🔔 notification do farmera
+  //  notification do farmera
   if (announcement?.farmer_id) {
     await supabase.from("notifications").insert({
       farmer_id: announcement.farmer_id,
@@ -142,7 +147,7 @@ export async function addTransportInterest(formData: FormData) {
 
   if (!announcementId) return;
 
-  // 🔒 tylko transport może kliknąć
+  //  tylko transport może kliknąć
   const { data: profile } = await supabase
     .from("profiles")
     .select("role")
@@ -151,7 +156,7 @@ export async function addTransportInterest(formData: FormData) {
 
   if (profile?.role !== "transport") return;
 
-  // ➕ zapis (unikalność ogarnia DB)
+  //  zapis (unikalność ogarnia DB)
   await supabase.from("transport_interests").insert({
     announcement_id: announcementId,
     transport_user_id: user.id,
@@ -165,7 +170,7 @@ export async function addWarehouseInterest(formData: FormData) {
 
   if (!announcementId) return;
 
-  // 🔒 tylko warehouse
+  //  tylko warehouse
   const { data: profile } = await supabase
     .from("profiles")
     .select("role")
