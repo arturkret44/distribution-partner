@@ -141,7 +141,7 @@ acc[category].push({
     contacted: interests?.filter((i: any) => i.status === "contacted") ?? [],
     agreed: interests?.filter((i: any) => i.status === "agreed") ?? [],
     rejected: interests?.filter((i: any) => i.status === "rejected") ?? [],
-    closed: interests?.filter((i) => i.status === "closed") ?? [],
+    closed: interests?.filter((i: any) => i.status === "closed") ?? [],
   };
 
 
