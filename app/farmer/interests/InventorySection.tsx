@@ -187,7 +187,7 @@ Interested buyers for {item.product_name}
   </tr>
 </thead>
         <tbody>
-          {item.buyers.map((b: any) => (
+          {(item.buyers ?? []).map((b: any) => (
 <tr key={b.interest_id}>
 <td className="py-2 px-3">
 <a
