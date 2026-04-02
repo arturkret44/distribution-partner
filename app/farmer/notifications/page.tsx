@@ -1,4 +1,4 @@
-import { requireRole } from "@/lib/guards";
+import { requireRole, requireApprovedUser } from "@/lib/guards";
 import { supabaseServer } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
