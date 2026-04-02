@@ -103,7 +103,7 @@ const { data: completedDeals } = await supabase
   }
 
   // 2. Jeśli są requesty – pobieramy profile farmerów osobno
-  let requestsWithProfiles = requests || [];
+  let requestsWithProfiles: any[] = requests || [];
 
   if (requests && requests.length > 0) {
     const farmerIds = requests.map((r) => r.farmer_id);
