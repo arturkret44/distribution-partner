@@ -26,6 +26,19 @@ body {
 }
 .input {
   @apply w-full rounded-md border border-gray-300 px-3 py-2
-         text-gray-900
          focus:outline-none focus:ring-2 focus:ring-green-500;
+}
+/* ==== FORM INPUT FIX ==== */
+
+input,
+select,
+textarea {
+  color: #111827; /* tailwind text-gray-900 */
+  background-color: #ffffff;
+}
+
+/* placeholder kolor */
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af; /* tailwind gray-400 */
 }
