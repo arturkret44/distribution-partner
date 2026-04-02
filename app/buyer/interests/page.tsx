@@ -243,7 +243,7 @@ const statusDescriptions: Record<string, string> = {
                         </a>
                       </p>
 
-                      {interest.announcement?.farmer?.phone && (
+                      {farmer?.phone && (
                         <p>📞 {farmer.phone}</p>
                       )}
 
@@ -360,7 +360,6 @@ const statusDescriptions: Record<string, string> = {
 </React.Fragment>
       );
 })}
-      ))}
     </tbody>
   </table>
 </div>
