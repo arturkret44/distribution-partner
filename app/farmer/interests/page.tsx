@@ -86,7 +86,7 @@ if (closedDeals) {
 
 const sold =
   related?.reduce(
-    (sum, i) =>
+    (sum: number, i: any) =>
       i.status === "agreed" || i.status === "closed"
         ? sum + (i.requested_quantity || 0)
         : sum,
