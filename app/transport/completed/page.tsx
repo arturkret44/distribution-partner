@@ -21,7 +21,11 @@ export default async function CompletedTransportPage() {
       delivery_date,
       cargo_type,
       cargo_weight,
-      pallets_count
+      pallets_count,
+      profile:profiles!transport_requests_farmer_id_fkey (
+        company_name,
+        contact_email
+      )
     `)
     .eq("transport_user_id", user.id)
     .eq("status", "closed")
