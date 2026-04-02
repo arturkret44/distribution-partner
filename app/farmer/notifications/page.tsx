@@ -58,7 +58,7 @@ export default async function FarmerNotificationsPage() {
                 <div>
                   <p className="text-sm text-gray-800">
                     Someone is interested in your product{" "}
-                    <b>{n.announcements?.product_name}</b>
+                    <b>{n.announcements?.[0]?.product_name}</b>
                   </p>
                   <p className="text-xs text-gray-500 mt-1">
                     {new Date(n.created_at).toLocaleString()}
