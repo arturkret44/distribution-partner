@@ -316,7 +316,6 @@ export function CreateAnnouncementForm({
         <select
           name="price_type"
           defaultValue={announcement?.price_type || "fixed"}
-          defaultValue="fixed"
           className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2"
         >
           {PRICE_TYPES.map((p) => (
