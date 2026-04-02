@@ -126,8 +126,8 @@ Close deal
 </>
 )
 }
-
-function toggle(key:string){
+type StatusKey = "pending" | "contacted" | "agreed" | "rejected";
+function toggle(key: StatusKey){
   setOpen(prev => ({ ...prev, [key]: !prev[key] }));
 }
 
