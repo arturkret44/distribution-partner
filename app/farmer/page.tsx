@@ -107,6 +107,12 @@ const { data: productData } = await supabase
   .select("product_name, quantity, quantity_available")
   .eq("farmer_id", user.id);
 
+const salesChartData =
+  productData?.map((p) => ({
+    name: p.product_name,
+    value: p.quantity ?? 0,
+  })) ?? [];
+  
 const productChartData =
   productData?.map((p) => ({
     name: p.product_name,
@@ -147,7 +153,7 @@ const productChartData =
 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
 
   <div className="bg-white p-5 rounded-xl shadow-sm h-full">
-    <SalesChart data={productChartData} />
+    <SalesChart data={salesChartData} />
   </div>
 
   <div className="bg-white p-5 rounded-xl shadow-sm h-full">
