@@ -62,20 +62,20 @@ const { data: topFarmers } = await supabase.rpc("get_top_farmers");
       {/* GRID */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        {/* 🍩 PIPELINE */}
+        {/*  PIPELINE */}
 <div className="bg-white p-5 rounded-xl shadow-sm space-y-6">
 
-  {/* 🍩 CHART */}
+  {/*  CHART */}
   <BuyerPipelineChart status={statusCount} />
 
-  {/* ⭐ TOP FARMERS */}
+  {/*  TOP FARMERS */}
 
   <div>
     <h3 className="text-sm font-medium text-gray-700 mb-3">
       ⭐ Top farmers
     </h3>
 <div className="space-y-2 text-sm text-gray-600">
-  {topFarmers?.map((f) => (
+  {topFarmers?.map((f: any) => (
     <div key={f.farmer_id} className="flex justify-between">
       
       <span className="truncate">
@@ -101,7 +101,7 @@ const { data: topFarmers } = await supabase.rpc("get_top_farmers");
 
   </div>
 
-  {/* 🚚 TRACKING */}
+  {/*  TRACKING */}
   <div className="opacity-60">
     <h3 className="text-sm font-medium text-gray-700 mb-2">
       🚚 Order tracking
@@ -113,7 +113,7 @@ const { data: topFarmers } = await supabase.rpc("get_top_farmers");
   </div>
 
 </div>
-        {/* 📦 LATEST */}
+        {/*  LATEST */}
 <div className="bg-white p-5 rounded-xl shadow-sm">
   <h3 className="text-sm font-medium mb-4">
     Latest announcements
@@ -139,7 +139,7 @@ const { data: topFarmers } = await supabase.rpc("get_top_farmers");
               {a.pickup_region || "Unknown location"}
             </p>
 
-            {/* 🔥 EXTRA INFO */}
+            {/*  EXTRA INFO */}
             <div className="flex flex-wrap gap-3 mt-2 text-xs text-gray-600">
               
               <span>
@@ -185,7 +185,7 @@ const { data: topFarmers } = await supabase.rpc("get_top_farmers");
   </div>
 </div>
 
-        {/* 💰 FINANCING */}
+        {/*  FINANCING */}
         <ActionCard
           title="Financing"
           description="Access funding solutions"
@@ -193,7 +193,7 @@ const { data: topFarmers } = await supabase.rpc("get_top_farmers");
           icon="💰"
         />
 
-        {/* 📰 NEWS */}
+        {/*  NEWS */}
         <ActionCard
           title="Market news"
           description="Latest agriculture insights"
