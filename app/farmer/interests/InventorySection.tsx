@@ -156,7 +156,7 @@ className="ml-2 px-2 py-0.5 rounded-full text-xs bg-green-100 text-green-700"
 >
 regular
 </span>
-  {item.buyers?.length > 0 && (
+  {(item.buyers?.length ?? 0) > 0 && (
     <span
 className="ml-2 px-2 py-0.5 rounded-full text-xs bg-green-100 text-green-700 font-medium"
     >
