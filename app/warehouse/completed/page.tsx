@@ -91,8 +91,8 @@ for (const deal of dealsWithProfiles) {
 {dealsWithProfiles.map((r) => (
                   <tr key={r.id} className="border-t">
                     <td className="p-3">
-{r.announcements?.product_name ? (
-  <span>📦 {r.announcements.product_name}</span>
+{r.announcements?.[0]?.product_name ? (
+  <span>📦 {r.announcements[0].product_name}</span>
 ) : (
   <span className="text-gray-500 italic text-sm">
     General inquiry
