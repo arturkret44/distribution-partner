@@ -58,7 +58,7 @@ const announcementsMap = Object.fromEntries(
 const closedDeals =
   interests?.filter((i: any) => i.status?.trim() === "closed") ?? [];
 
-// 🔥 CHECK REVIEWS (dla każdego closed deal)
+//  CHECK REVIEWS (dla każdego closed deal)
 const reviewStatusMap: Record<string, boolean> = {};
 
 if (closedDeals) {
@@ -77,7 +77,7 @@ if (closedDeals) {
 
     const reserved =
       related?.reduce(
-        (sum, i) =>
+        (sum: number, i: any) =>
           i.status === "pending"
             ? sum + (i.requested_quantity || 0)
             : sum,
