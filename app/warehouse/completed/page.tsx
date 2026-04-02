@@ -25,6 +25,10 @@ const { data: deals } = await supabase
   storage_type,
   announcements (
     product_name
+  ),
+  profile:profiles!warehouse_requests_farmer_id_fkey (
+    company_name,
+    contact_email
   )
 `)
   .eq("warehouse_user_id", user.id)
