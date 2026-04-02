@@ -46,7 +46,7 @@ export default async function FarmerProfilePage() {
           />
         </div>
 
-        {/* IMAGES SECTION 🔥 */}
+        {/* IMAGES SECTION  */}
         <div className="bg-white/90 backdrop-blur rounded-2xl border shadow-sm p-6 mb-8">
 
           <div className="flex items-center justify-between mb-4">
@@ -70,7 +70,7 @@ export default async function FarmerProfilePage() {
           {/* PREVIEW GRID */}
           {imageCount > 0 ? (
             <div className="grid grid-cols-3 gap-3">
-              {images.slice(0, 3).map((img) => (
+              {(images ?? []).slice(0, 3).map((img) => (
                 <img
                   key={img.id}
                   src={img.public_url}
