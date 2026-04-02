@@ -161,7 +161,11 @@ const statusDescriptions: Record<string, string> = {
 
     {/* BODY */}
     <tbody>
-      {items.map((interest) => (
+      {items.map((interest) => {
+  const ann = interest.announcement?.[0];
+  const farmer = ann?.farmer?.[0];
+
+  return (
 <React.Fragment key={interest.id}>
           {/* MAIN ROW */}
           <tr
@@ -171,22 +175,22 @@ const statusDescriptions: Record<string, string> = {
           >
             <td className="py-3">
               <Link
-                href={`/announcements/${interest.announcement?.id}?from=interests`}
+                href={`/announcements/${ann?.id}?from=interests`}
                 className="font-medium text-gray-900 hover:underline"
               >
-                {interest.announcement?.product_name}
+                {ann?.product_name}
               </Link>
             </td>
 
             <td>
-              {interest.announcement?.quantity}{" "}
-              {interest.announcement?.unit}
+              {ann?.quantity}
+              {ann?.unit}
             </td>
 
             <td className="text-green-700 font-medium">
               {interest.offered_price
                 ? `${interest.offered_price} SEK`
-                : `${interest.announcement?.price} SEK`}
+                : `${ann?.price} SEK`}
             </td>
 
             <td className="text-gray-500">
@@ -230,18 +234,17 @@ const statusDescriptions: Record<string, string> = {
                       <p>
                         🏢{" "}
                         <a
-                          href={`/profiles/${interest.announcement?.farmer?.id}?from=/buyer/interests`}
+                          href={`/profiles/${farmer?.id}?from=/buyer/interests`}
                           className="text-green-700 font-semibold hover:underline"
                         >
                           {
-                            interest.announcement?.farmer
-                              ?.company_name
+                            farmer?.company_name
                           }
                         </a>
                       </p>
 
                       {interest.announcement?.farmer?.phone && (
-                        <p>📞 {interest.announcement.farmer.phone}</p>
+                        <p>📞 {farmer.phone}</p>
                       )}
 
                       {interest.announcement?.farmer
@@ -249,8 +252,7 @@ const statusDescriptions: Record<string, string> = {
                         <p>
                           ✉️{" "}
                           {
-                            interest.announcement.farmer
-                              .contact_email
+                            farmer.contact_email
                           }
                         </p>
                       )}
@@ -260,13 +262,13 @@ const statusDescriptions: Record<string, string> = {
                           🌐{" "}
                           <a
                             href={
-                              interest.announcement.farmer.website
+                              farmer.website
                             }
                             target="_blank"
                             className="text-green-700 underline"
                           >
                             {
-                              interest.announcement.farmer.website
+                              farmer.website
                             }
                           </a>
                         </p>
@@ -356,6 +358,8 @@ const statusDescriptions: Record<string, string> = {
             </tr>
           )}
 </React.Fragment>
+      );
+})}
       ))}
     </tbody>
   </table>
