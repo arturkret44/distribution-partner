@@ -73,6 +73,15 @@ if (closedDeals) {
 }
 
   const inventoryByCategory = announcements?.reduce((acc: any, a) => {
+    const th = {
+  padding: "10px",
+  textAlign: "left" as const,
+  fontWeight: 600,
+};
+
+const td = {
+  padding: "10px",
+};
     const related = interests?.filter((i: any) => i.announcement_id === a.id);
 
     const reserved =
