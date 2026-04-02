@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 
 export default async function FarmerNotificationsPage() {
   await requireRole("farmer");
-
+  const { user } = await requireApprovedUser();
   const supabase = await supabaseServer();
 
   const { data: notifications, error } = await supabase
@@ -19,7 +19,7 @@ export default async function FarmerNotificationsPage() {
         product_name
       )
     `)
-    .eq("farmer_id", user!.id)
+    .eq("farmer_id", user.id)
     .order("created_at", { ascending: false });
 
   if (error) {
