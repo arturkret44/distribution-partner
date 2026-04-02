@@ -247,8 +247,7 @@ const statusDescriptions: Record<string, string> = {
                         <p>📞 {farmer.phone}</p>
                       )}
 
-                      {interest.announcement?.farmer
-                        ?.contact_email && (
+                      {farmer?.contact_email && (
                         <p>
                           ✉️{" "}
                           {
