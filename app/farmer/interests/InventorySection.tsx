@@ -160,7 +160,7 @@ regular
     <span
 className="ml-2 px-2 py-0.5 rounded-full text-xs bg-green-100 text-green-700 font-medium"
     >
-      {item.buyers.length} buyers
+      {item.buyers?.length ?? 0} buyers
     </span>
   )}
 </td>
