@@ -43,7 +43,9 @@ export default async function CompletedTransportPage() {
 
     dealsWithProfiles = deals.map((d) => ({
       ...d,
-      profile: farmers?.find((f) => f.id === d.farmer_id) || null,
+      profile: farmers?.find((f) => f.id === d.farmer_id)
+  ? [farmers.find((f) => f.id === d.farmer_id)]
+  : [],
     }));
   }
 // 🔥 REVIEW STATUS
