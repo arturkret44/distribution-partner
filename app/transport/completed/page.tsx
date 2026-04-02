@@ -43,12 +43,15 @@ export default async function CompletedTransportPage() {
 
     dealsWithProfiles = deals.map((d) => ({
       ...d,
-      profile: farmers?.find((f) => f.id === d.farmer_id)
-  ? [farmers.find((f) => f.id === d.farmer_id)]
-  : [],
+const farmer = farmers?.find((f) => f.id === d.farmer_id);
+
+profile: farmer ? [{ 
+  company_name: farmer.company_name,
+  contact_email: farmer.contact_email
+}] : []
     }));
   }
-// 🔥 REVIEW STATUS
+//  REVIEW STATUS
 const reviewStatusMap: Record<string, boolean> = {};
 
 for (const deal of dealsWithProfiles) {
