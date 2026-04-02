@@ -34,7 +34,15 @@ function StatusBadge({ status }: { status: string }) {
 export default async function FarmerInterestsPage() {
   const { user } = await requireApprovedUser();
   const supabase = await supabaseServer();
+  const th = {
+    padding: "10px",
+    textAlign: "left" as const,
+    fontWeight: 600,
+  };
 
+  const td = {
+    padding: "10px",
+  };
   const { data: interests, error } = await supabase.rpc(
     "get_farmer_interests",
     { p_farmer_id: user.id }
