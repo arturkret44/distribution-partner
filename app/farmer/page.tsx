@@ -110,7 +110,8 @@ const { data: productData } = await supabase
 const productChartData =
   productData?.map((p) => ({
     name: p.product_name,
-    value: p.quantity,
+    total: p.quantity ?? 0,
+    sold: (p.quantity ?? 0) - (p.quantity_available ?? 0),
   })) ?? [];
   return (
     <div className="relative space-y-10">
