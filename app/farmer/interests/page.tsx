@@ -73,7 +73,7 @@ if (closedDeals) {
 }
 
   const inventoryByCategory = announcements?.reduce((acc: any, a) => {
-    const related = interests?.filter((i) => i.announcement_id === a.id);
+    const related = interests?.filter((i: any) => i.announcement_id === a.id);
 
     const reserved =
       related?.reduce(
