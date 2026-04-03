@@ -573,7 +573,7 @@ const ratingCounts = [5, 4, 3, 2, 1].map((star) => ({
                   Why this profile matters
                 </h2>
 
-                <p className="mt-4 text-gray-300 leading-7">
+                <p className="mt-4 text-white leading-7">
                   Review the company details, gallery, logistics setup and
                   commercial information before making contact.
                 </p>
@@ -582,7 +582,7 @@ const ratingCounts = [5, 4, 3, 2, 1].map((star) => ({
 
   {/* COMPANY NAME */}
   <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
-    <p className="text-sm text-gray-400">Company</p>
+    <p className="text-sm text-white">Company</p>
     <p className="mt-1 font-semibold text-white">
       {profileName}
     </p>
@@ -590,7 +590,7 @@ const ratingCounts = [5, 4, 3, 2, 1].map((star) => ({
 
   {/* WEBSITE */}
   <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
-    <p className="text-sm text-gray-400">Website</p>
+    <p className="text-sm text-white">Website</p>
     {details.website || baseProfile.website ? (
       <a
         href={details.website || baseProfile.website}
@@ -678,7 +678,7 @@ const ratingCounts = [5, 4, 3, 2, 1].map((star) => ({
                   <p className="text-sm font-medium text-green-200">
                     Contact readiness
                   </p>
-                  <p className="mt-2 text-sm text-gray-200">
+                  <p className="mt-2 text-sm text-white">
                     Use the public information here to assess fit before moving
                     into direct discussions.
                   </p>
