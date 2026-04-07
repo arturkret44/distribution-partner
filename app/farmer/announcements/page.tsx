@@ -202,7 +202,7 @@ const warehouseMap = (warehouseInterests || []).reduce((acc: any, w: any) => {
     <span style={{ color: "#94a3b8" }}>—</span>
   )}
 </td>
-<td className="px-6 py-4">
+<td className="px-6 py-4 flex gap-2 flex-wrap">
   <a
     href={`/announcements/${a.id}/images`}
     className="text-sm px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-100 transition"
