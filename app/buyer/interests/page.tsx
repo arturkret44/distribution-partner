@@ -5,6 +5,7 @@ import CloseDealButton from "./CloseDealButton";
 import Link from "next/link";
 import { getUserReview, createReview } from "@/lib/reviews";
 import React from "react";
+import { openOrCreateChat } from "@/app/chat/actions";
 export const dynamic = "force-dynamic";
 
 export default async function BuyerInterestsPage() {
@@ -19,7 +20,7 @@ export default async function BuyerInterestsPage() {
       created_at,
       offered_price,
       read_at,
-      announcement:announcements (
+      announcement:announcements!inner (
         id,
         product_name,
         quantity,
@@ -57,6 +58,35 @@ const reviewMap: Record<
 for (const deal of closedDeals) {
   const review = await getUserReview(user.id, "interest", deal.id);
   reviewMap[deal.id] = review;
+}
+
+const unreadMap: Record<string, number> = {};
+
+if (interests) {
+  for (const interest of interests) {
+    let unreadCount = 0;
+
+    const { data: chat } = await supabase
+      .from("chats")
+      .select("id, buyer_last_read_at")
+      .eq("interest_id", interest.id)
+      .single();
+
+    if (chat) {
+      const { count } = await supabase
+        .from("messages")
+        .select("*", { count: "exact", head: true })
+        .eq("chat_id", chat.id)
+        .gt(
+          "created_at",
+          chat.buyer_last_read_at || "1970-01-01"
+        );
+
+      unreadCount = count || 0;
+    }
+
+    unreadMap[interest.id] = unreadCount;
+  }
 }
   return (
     <main className="min-h-screen bg-gradient-to-br from-yellow-50 to-yellow-100">
@@ -160,11 +190,14 @@ const statusDescriptions: Record<string, string> = {
     </thead>
 
     {/* BODY */}
-    <tbody>
-      {items.map((interest) => {
-  const ann = interest.announcement?.[0];
-  const farmer = ann?.farmer?.[0];
 
+<tbody>
+ {items.map((interest) => {
+const ann = Array.isArray(interest.announcement)
+  ? interest.announcement[0]
+  : interest.announcement;
+console.log(JSON.stringify(interests, null, 2));
+const farmer = ann?.farmer;
   return (
 <React.Fragment key={interest.id}>
           {/* MAIN ROW */}
@@ -214,6 +247,21 @@ const statusDescriptions: Record<string, string> = {
                   </button>
                 </form>
               )}
+{interest.status === "agreed" && (
+  <form action={openOrCreateChat} className="mt-3">
+    <input type="hidden" name="interest_id" value={interest.id} />
+
+<button className="relative bg-blue-600 text-white px-4 py-2 rounded text-sm">
+  💬 Chat with farmer
+
+{unreadMap[interest.id] > 0 && (
+    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] px-2 py-0.5 rounded-full">
+{unreadMap[interest.id]}
+    </span>
+  )}
+</button>
+  </form>
+)}
             </td>
           </tr>
 
@@ -358,7 +406,7 @@ const statusDescriptions: Record<string, string> = {
           )}
 </React.Fragment>
       );
-})}
+      })}
     </tbody>
   </table>
 </div>
@@ -393,3 +441,4 @@ function StatusBadge({ status }: { status: string }) {
     </span>
   );
 }
+
