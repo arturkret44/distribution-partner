@@ -197,7 +197,9 @@ const ann = Array.isArray(interest.announcement)
   ? interest.announcement[0]
   : interest.announcement;
 console.log(JSON.stringify(interests, null, 2));
-const farmer = ann?.farmer;
+const farmer = Array.isArray(ann?.farmer)
+  ? ann?.farmer[0]
+  : ann?.farmer;
   return (
 <React.Fragment key={interest.id}>
           {/* MAIN ROW */}
