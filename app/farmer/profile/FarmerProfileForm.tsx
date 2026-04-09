@@ -18,7 +18,7 @@ const [canExport, setCanExport] = useState(
 );
 
   return (
-    <form action={saveAction} className="mt-6 space-y-4 max-w-xl">
+    <form action={saveAction} className="mt-6 space-y-4 max-w-5xl">
 
       {/* Email read-only */}
       <div>
@@ -421,8 +421,7 @@ const [canExport, setCanExport] = useState(
     Export
   </h2>
 
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
+<div className="space-y-4">
     <div className="flex items-center gap-3 mt-2">
 <input
   type="checkbox"
@@ -438,7 +437,7 @@ const [canExport, setCanExport] = useState(
     Export countries
   </label>
 
-<div className="mt-2 flex flex-wrap gap-3">
+<div className="mt-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
   {EU_COUNTRIES.map((country) => {
     const selected =
       profile?.export_countries?.split(",").includes(country) || false;
@@ -446,9 +445,9 @@ const [canExport, setCanExport] = useState(
     return (
 <label
   key={country}
-  className={`flex items-center gap-2 px-3 py-2 border rounded-lg text-sm shadow-sm transition
+  className={`w-full flex items-start gap-2 px-3 py-2 border rounded-xl text-sm shadow-sm transition
     ${canExport
-      ? "bg-white hover:bg-gray-50 cursor-pointer"
+      ? "bg-white hover:bg-green-50 hover:border-green-400 cursor-pointer"
       : "bg-gray-100 opacity-50 cursor-not-allowed"
     }`}
 >
@@ -458,9 +457,9 @@ const [canExport, setCanExport] = useState(
     value={country}
     defaultChecked={selected}
     disabled={!canExport}
-    className="h-4 w-4"
+    className="h-4 w-4 shrink-0 mt-1"
   />
-  <span>{country}</span>
+<span className="text-sm">{country}</span>
 </label>
     );
   })}
