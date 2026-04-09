@@ -25,7 +25,11 @@ export async function openOrCreateChat(formData: FormData) {
     throw new Error("Chat allowed only for agreed deals");
   }
 
-  const farmerId = interest.announcement?.farmer_id;
+  const announcement = Array.isArray(interest.announcement)
+  ? interest.announcement[0]
+  : interest.announcement;
+
+const farmerId = announcement?.farmer_id;
   const buyerId = interest.buyer_id;
 
   if (!farmerId || !buyerId) return;
