@@ -143,7 +143,34 @@ acc[category].push({
     rejected: interests?.filter((i: any) => i.status === "rejected") ?? [],
     closed: interests?.filter((i: any) => i.status === "closed") ?? [],
   };
+const unreadMap: Record<string, number> = {};
 
+if (interests) {
+  for (const interest of interests) {
+    let unreadCount = 0;
+
+    const { data: chat } = await supabase
+      .from("chats")
+      .select("id, farmer_last_read_at")
+      .eq("interest_id", interest.interest_id)
+      .single();
+
+    if (chat) {
+      const { count } = await supabase
+        .from("messages")
+        .select("*", { count: "exact", head: true })
+        .eq("chat_id", chat.id)
+        .gt(
+          "created_at",
+          chat.farmer_last_read_at || "1970-01-01"
+        );
+
+      unreadCount = count || 0;
+    }
+
+    unreadMap[interest.interest_id] = unreadCount;
+  }
+}
 
   const buyersView = (
 
@@ -176,6 +203,7 @@ acc[category].push({
           </thead>
 <InterestedBuyersSection
   grouped={grouped}
+  unreadMap={unreadMap}
 />
         </table>
       )}
@@ -304,4 +332,5 @@ className="bg-green-600 hover:bg-green-700 text-white rounded-md px-3 py-1 text-
     </main>
   );
 }
+
 
