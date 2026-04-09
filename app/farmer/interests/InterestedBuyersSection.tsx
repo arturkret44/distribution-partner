@@ -2,10 +2,12 @@
 
 import React from "react";
 import { updateInterestStatus, closeDeal } from "./actions";
+import { openOrCreateChat } from "@/app/chat/actions";
 
 export default function InterestedBuyersSection({
   grouped,
   td,
+  unreadMap,
 }: any) {
 const [open, setOpen] = React.useState({
   pending: true,
@@ -116,7 +118,53 @@ Close deal
 
 </form>
 )}
+{i.status === "agreed" ? (
+  <form action={openOrCreateChat}>
+    <input type="hidden" name="interest_id" value={i.interest_id} />
 
+<button
+type="submit"
+style={{
+background:"#1d4ed8",
+color:"white",
+border:"none",
+borderRadius:6,
+padding:"4px 10px",
+fontSize:12,
+cursor:"pointer",
+position:"relative"
+}}
+>
+💬 Chat
+
+{unreadMap?.[i.interest_id] > 0 && (
+  <span
+    style={{
+      position: "absolute",
+      top: -6,
+      right: -6,
+      background: "#ef4444",
+      color: "white",
+      fontSize: 10,
+      padding: "2px 6px",
+      borderRadius: 999,
+      fontWeight: 600,
+    }}
+  >
+    {unreadMap[i.interest_id]}
+  </span>
+)}
+</button>
+  </form>
+) : (
+  <button
+    disabled
+    title="Change status to 'agreed' to unlock chat"
+    className="bg-gray-300 text-gray-500 px-3 py-1 rounded text-xs cursor-not-allowed"
+  >
+    💬 Chat
+  </button>
+)}
 </div>
 </td>
 
