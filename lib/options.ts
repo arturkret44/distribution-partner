@@ -89,19 +89,36 @@ export const DELIVERY_SCOPES = [
 
 // ===== EU COUNTRIES (na start) =====
 export const EU_COUNTRIES = [
-  "Sweden",
+  "Austria",
+  "Belgium",
+  "Bulgaria",
+  "Croatia",
+  "Cyprus",
+  "Czech Republic",
   "Denmark",
+  "Estonia",
   "Finland",
-  "Norway",
+  "France",
   "Germany",
+  "Greece",
+  "Hungary",
+  "Ireland",
+  "Italy",
+  "Latvia",
+  "Lithuania",
+  "Luxembourg",
+  "Malta",
   "Netherlands",
   "Poland",
-  "France",
-  "Italy",
+  "Portugal",
+  "Romania",
+  "Slovakia",
+  "Slovenia",
   "Spain",
-  "Belgium",
-  "Austria",
+  "Sweden",
+  "Norway"
 ];
+
 
 export function getLabel(
   options: { value: string; label: string }[],
