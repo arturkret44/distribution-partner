@@ -75,7 +75,7 @@ const backHref = from || "/announcements";
   const isApproved = profile?.verification_status === "approved";
   const userRole = profile?.role;
 
-  // 🔥 UPDATED SELECT WITH NEW FIELDS
+  //  UPDATED SELECT WITH NEW FIELDS
   const { data: announcement, error: announcementError } = await supabase
     .from("announcements")
     .select(`
@@ -347,7 +347,7 @@ if (userRole === "warehouse" && user) {
     </div>
   </div>
 </div>
-        {/* 🛒 INTEREST FORM */}
+        {/*  INTEREST FORM */}
         {!isOwner &&
           isApproved &&
           userRole === "buyer" &&
@@ -400,13 +400,16 @@ if (userRole === "warehouse" && user) {
                       Your offer price (SEK)
                     </label>
 
-                    <input
-                      type="number"
-                      name="offered_price"
-                      required
-                      className="w-full border rounded-md px-3 py-2"
-                      placeholder="Enter your offer"
-                    />
+<input
+  type="number"
+  name="offered_price"
+  step="0.01"
+  min="0.01"
+  inputMode="decimal"
+  required
+  className="w-full border rounded-md px-3 py-2"
+  placeholder="Enter your offer"
+/>
                   </div>
                 )}
 
@@ -422,7 +425,7 @@ if (userRole === "warehouse" && user) {
               </form>
             </div>
           )}
-{/* 🚛 TRANSPORT INTEREST */}
+{/* TRANSPORT INTEREST */}
 {!isOwner && isApproved && userRole === "transport" && (
   <div className="mt-8 bg-white rounded-xl shadow-sm border p-6">
 
@@ -443,7 +446,7 @@ if (userRole === "warehouse" && user) {
 )}
   </div>
 )}
-{/* 🏢 WAREHOUSE INTEREST */}
+{/* WAREHOUSE INTEREST */}
 {!isOwner && isApproved && userRole === "warehouse" && (
   <div className="mt-8 bg-white rounded-xl shadow-sm border p-6">
 
