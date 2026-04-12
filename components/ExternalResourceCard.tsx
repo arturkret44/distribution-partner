@@ -9,7 +9,7 @@ export default function ExternalResourceCard({
   title: string;
   description: string;
   href: string;
-  icon: string;
+  icon?: string;
 }) {
   return (
     <a
@@ -26,7 +26,7 @@ export default function ExternalResourceCard({
       <p className="text-xs text-gray-400">{title}</p>
 
       <div className="flex items-center gap-2 mt-2">
-        <span className="text-xl">{icon}</span>
+        <span className="text-xl">{icon ?? "🔗"}</span>
         <p className="text-lg font-semibold">{title}</p>
       </div>
 
