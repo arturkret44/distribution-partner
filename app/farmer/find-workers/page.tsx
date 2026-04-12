@@ -36,7 +36,6 @@ export default async function FindWorkersPage() {
             title={r.title}
             description={r.description}
             href={r.href}
-            icon={r.icon}
           />
         ))}
 
