@@ -142,3 +142,4 @@ export function getResourcesByRoleAndCategory(
   return EXTERNAL_RESOURCES.filter(
     (r) => r.roles.includes(role) && r.category === category
   );
+}
