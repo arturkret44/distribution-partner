@@ -105,7 +105,11 @@ export default async function FarmerLayout({
 
             <SidebarItem href="/farmer/find-transport" label="Transport" icon="🚚" />
             <SidebarItem href="/farmer/find-warehouse" label="Warehouse" icon="🏬" />
-
+<SidebarItem
+  href="/farmer/find-workers"
+  label="Find workers"
+  icon="👷"
+/>
             <SidebarItem
               href="/farmer/requests"
               label="Requests"
