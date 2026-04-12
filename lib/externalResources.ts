@@ -7,7 +7,6 @@ export type ExternalResource = {
   title: string;
   description: string;
   href: string;
-  icon: string;
   roles: UserRole[];
   category: "workers"; 
 };
@@ -39,7 +38,6 @@ export const EXTERNAL_RESOURCES: ExternalResource[] = [
     description:
       "Official Swedish employment service with access to local workforce.",
     href: "https://arbetsformedlingen.se/",
-    icon: "🇸🇪",
     roles: ["farmer"],
     category: "workers",
   },
@@ -69,7 +67,6 @@ export const EXTERNAL_RESOURCES: ExternalResource[] = [
   description:
     "Official Swedish platform to find drivers and transport staff.",
   href: "https://arbetsformedlingen.se/",
-  icon: "🇸🇪",
   roles: ["transport"],
   category: "workers",
 },
@@ -109,7 +106,6 @@ export const EXTERNAL_RESOURCES: ExternalResource[] = [
   description:
     "Official Swedish platform to find warehouse employees.",
   href: "https://arbetsformedlingen.se/",
-  icon: "🇸🇪",
   roles: ["warehouse"],
   category: "workers",
 },
