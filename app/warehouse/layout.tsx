@@ -71,6 +71,11 @@ export default async function WarehouseLayout({
               label="Browse"
               icon="📦"
             />
+            <SidebarItem
+  href="/warehouse/find-workers"
+  label="Find workers"
+  icon="👷"
+/>
 
             <SidebarItem
               href="/warehouse/profile"
