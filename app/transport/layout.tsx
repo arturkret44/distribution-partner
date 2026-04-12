@@ -75,6 +75,11 @@ export default async function TransportLayout({
   icon="📦"
 />
             <SidebarItem
+  href="/transport/find-workers"
+  label="Find workers"
+  icon="👷"
+/>
+            <SidebarItem
               href="/transport/profile"
               label="Profile"
               icon="👤"
