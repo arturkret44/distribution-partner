@@ -7,6 +7,7 @@ export type ExternalResource = {
   title: string;
   description: string;
   href: string;
+  icon?: string;
   roles: UserRole[];
   category: "workers"; 
 };
